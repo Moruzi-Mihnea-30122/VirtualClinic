@@ -6,7 +6,8 @@ import { Appointments } from './pages/appointments/appointments';
 import { Login } from './pages/login/login';
 
 export const routes: Routes = [
-  { path: '', component: Home }, // Pagina default
+  { path: '', redirectTo: 'login', pathMatch: 'full'},
+  { path: 'home', component: Home },
   { path: 'medics', component: MedicsComponent },
   { path: 'appointments', component: Appointments },
   { path: 'pacients', component: Pacients},

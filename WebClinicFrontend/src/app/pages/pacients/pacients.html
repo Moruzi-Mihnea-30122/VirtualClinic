@@ -1,1 +1,20 @@
-<p>pacients works!</p>
+<h2>Lista Pacienti</h2>
+
+@if (pacients().length > 0) {
+  <ul>
+    @for (pacient of pacients(); track pacient.id) {
+      <li>
+        <strong>{{ pacient.name }}</strong> - {{ pacient.emailAddress }}
+      </li>
+    }
+  </ul>
+} @else {
+  <p>Nu există pacienti în listă</p>
+}
+
+<div class="form-container">
+  <input [(ngModel)]="newPacient.name" placeholder="Full Name" />
+  <input [(ngModel)]="newPacient.emailAddress" placeholder="Email Address" />
+  <input [(ngModel)]="newPacient.telNumber" placeholder="Phone Number" />
+  <button (click)='addPacient()'>Add pacient</button>
+</div>

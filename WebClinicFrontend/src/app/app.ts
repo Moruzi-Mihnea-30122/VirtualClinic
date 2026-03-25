@@ -1,5 +1,5 @@
 import { Component, signal, OnInit} from '@angular/core';
-import { RouterOutlet , RouterLink} from '@angular/router';
+import { RouterOutlet , RouterLink, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,18 @@ import { RouterOutlet , RouterLink} from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {}
+export class App {
+userRole = signal<string | null>(localStorage.getItem("userRole"));
+
+constructor(private router: Router){ }
+
+logout(){
+  localStorage.clear();
+  this.userRole.set(null);
+  this.router.navigate(['/login']);
+}
+
+checkUserStatus(){
+  this.userRole.set(localStorage.getItem('userRole'));
+}
+}

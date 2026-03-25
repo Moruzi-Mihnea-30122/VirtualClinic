@@ -1,5 +1,5 @@
 import { Component, signal, OnInit} from '@angular/core';
-import { Medic } from '../../services/medics';
+import { MedicService } from '../../services/medics';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -10,16 +10,14 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './medics.css'
 })
 export class MedicsComponent implements OnInit{
-  protected readonly title = signal('WebClinicFrontend');
-
    medics = signal<any[]>([]);
 
    newMedic = {name:'', fieldOfWork:'' };
 
-  constructor(private medicService : Medic){ }
+  constructor(private medicService : MedicService){ }
 
   ngOnInit():void{
-    console.log("Pagina s-a reîncărcat, cerem datele...");
+    console.log("Loaded");
     this.loadMedics();
   }
 

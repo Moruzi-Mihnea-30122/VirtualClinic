@@ -1,10 +1,23 @@
+@if(userRole()){
 <nav>
-  <a routerLink="/">Home</a> |
-  <a routerLink="/medics">Medici</a> |
-  <a routerLink="/appointments">Programări</a> |
-  <a routerLink="/login">Login Pacient</a>
+  @if (userRole() === 'Admin'){
+  <a routerLink="/home">Home</a> |
+  <a routerLink="/medics">Medics</a> |
+  <a routerLink="/appointments">Appointments</a> |
+  <a routerLink="/pacients">Pacients</a>
+  }
+
+  @if (userRole() === 'Pacient'){
+    <a routerLink="/home">Home</a> |
+  <a routerLink="/medics">Medics</a> |
+  <a routerLink="/my-appointments">Appointments</a> |
+  }
+
+  <button (click)="logout()">Logout</button>
+
 </nav>
 
+}
 <hr>
 
 <router-outlet></router-outlet>

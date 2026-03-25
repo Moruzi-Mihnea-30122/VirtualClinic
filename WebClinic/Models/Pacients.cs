@@ -15,7 +15,10 @@ namespace WebClinic.Models
         [EmailAddress]
         public string EmailAddress { get; set; }
         [Required]
+        public string Password { get; set; }
+        [Required]
         [MinLength(10)]
         public string TelNumber { get; set; }
+        public string Role { get; set; }
     }
 }

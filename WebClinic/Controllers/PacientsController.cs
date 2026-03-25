@@ -94,6 +94,21 @@ namespace WebClinic.Controllers
             return CreatedAtAction("GetPacients", new { id = pacients.Id }, pacients);
         }
 
+        [HttpPost("login")]
+        public async Task<IActionResult> Login( LoginDto loginData)
+        {
+            var user = await _context.Pacients.FirstOrDefaultAsync(p => p.EmailAddress == loginData.Email);
+
+            if (user == null) { return NotFound(); }
+
+            return Ok(new
+            {
+                id = user.Id,
+                name = user.Name,
+                role = user.Role
+            });
+        }
+
         // DELETE: api/Pacients/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePacients(int id)
@@ -115,4 +130,9 @@ namespace WebClinic.Controllers
             return _context.Pacients.Any(e => e.Id == id);
         }
     }
+}
+
+public class LoginDto
+{
+    public string Email { get; set; }
 }
