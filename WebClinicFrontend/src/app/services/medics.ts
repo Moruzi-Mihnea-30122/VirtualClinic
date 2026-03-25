@@ -9,7 +9,6 @@ export class MedicService {
   private apiUrl = "https://localhost:7132/api/medics";
 
   constructor(private http: HttpClient) { }
-
   getMedics() {
     return this.http.get<any[]>(this.apiUrl);
   }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,9 @@ export class PacientsService {
   constructor(private http: HttpClient){ }
 
   getPacients(){
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.apiUrl).pipe(
+      map(users => users.filter(user => user.role != "Admin"))
+    );
   }
 
   addPacient(pacient: {name: string, emailAddress: string, telNumber: string}){

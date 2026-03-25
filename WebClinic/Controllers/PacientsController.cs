@@ -97,7 +97,7 @@ namespace WebClinic.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login( LoginDto loginData)
         {
-            var user = await _context.Pacients.FirstOrDefaultAsync(p => p.EmailAddress == loginData.Email);
+            var user = await _context.Pacients.FirstOrDefaultAsync(p => p.EmailAddress == loginData.Email && p.Password == loginData.Password);
 
             if (user == null) { return NotFound(); }
 
@@ -135,4 +135,5 @@ namespace WebClinic.Controllers
 public class LoginDto
 {
     public string Email { get; set; }
+    public string Password { get; set; }
 }

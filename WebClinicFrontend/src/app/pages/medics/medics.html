@@ -12,8 +12,10 @@
   <p>Nu există medici în listă sau se încarcă...</p>
 }
 
+@if(getUserRole() === "Admin"){
 <div class="form-container">
   <input [(ngModel)]="newMedic.name" placeholder="Medic's Full Name" />
   <input [(ngModel)]="newMedic.fieldOfWork" placeholder="Field of work" />
   <button (click)='saveMedic()'>Add medic</button>
 </div>
+}

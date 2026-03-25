@@ -2,6 +2,7 @@ import { Component, signal, OnInit} from '@angular/core';
 import { MedicService } from '../../services/medics';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { App } from '../../app';
 
 @Component({
   selector: 'app-medics',
@@ -14,7 +15,11 @@ export class MedicsComponent implements OnInit{
 
    newMedic = {name:'', fieldOfWork:'' };
 
-  constructor(private medicService : MedicService){ }
+  constructor(private medicService : MedicService, private appListener: App){ }
+
+  getUserRole(){
+    return this.appListener.userRole();
+  }
 
   ngOnInit():void{
     console.log("Loaded");

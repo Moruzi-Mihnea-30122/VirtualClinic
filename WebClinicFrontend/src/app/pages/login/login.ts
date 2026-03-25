@@ -17,8 +17,7 @@ export class Login {
   constructor(private router: Router, private http: HttpClient, private appListener: App){ }
 
   login(){
-    this.http.post('https://localhost:7132/api/Pacients/login', { email: this.email }).subscribe((user: any) => {
-      //TO DO: password check
+    this.http.post('https://localhost:7132/api/Pacients/login', { email: this.email, password: this.password }).subscribe((user: any) => {
         localStorage.setItem('userRole', user.role);
         localStorage.setItem('userId', user.id);
 
