@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 export class Pacients {
   pacients = signal<any[]>([]);
 
-  newPacient = {name: '', emailAddress: '', telNumber: ''};
+  newPacient = {name: '', emailAddress: '', telNumber: '', password: 'default', role: 'Pacient'};
 
   constructor(private pacientsService: PacientsService){ }
 
@@ -37,7 +37,7 @@ export class Pacients {
           this.loadPacients();
         }
       });
-      this.newPacient = {name: '', emailAddress: '', telNumber: ''};
+      this.newPacient = {name: '', emailAddress: '', telNumber: '', password: 'default', role: 'Pacient'};
       
     }
   }

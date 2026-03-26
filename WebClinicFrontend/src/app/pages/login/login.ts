@@ -17,13 +17,26 @@ export class Login {
   constructor(private router: Router, private http: HttpClient, private appListener: App){ }
 
   login(){
-    this.http.post('https://localhost:7132/api/Pacients/login', { email: this.email, password: this.password }).subscribe((user: any) => {
+    if(this.email && this.password){
+    this.http.post('https://localhost:7132/api/Pacients/login', { email: this.email, password: this.password }).subscribe({
+      next: (user: any) => {
         localStorage.setItem('userRole', user.role);
         localStorage.setItem('userId', user.id);
 
         this.appListener.checkUserStatus();
 
         this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        alert("User not found");
+      }
     })
+  }else{
+    alert("Please fill up the blanks");
+  }
+}
+
+  registerNav(){
+    this.router.navigate(['/register']);
   }
 }

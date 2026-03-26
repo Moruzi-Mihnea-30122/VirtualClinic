@@ -1,0 +1,11 @@
+<div class="login-container">
+  <input [(ngModel)]="newUser.name" placeholder="Full Name" />
+  <input [(ngModel)]="newUser.emailAddress" placeholder="Email Address" />
+  <input [(ngModel)]="newUser.telNumber" placeholder="Phone Number" />
+</div>
+<div>
+  <input [(ngModel)]="newUser.password" placeholder="Password" />
+  <input [(ngModel)]="checkedPassword" placeholder="Check Password" />
+</div>
+<button (click)='registerUser()'>Register</button>
+<button (click)="loginNav()">Back</button>

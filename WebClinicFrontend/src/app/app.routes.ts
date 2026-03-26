@@ -4,6 +4,7 @@ import { MedicsComponent } from './pages/medics/medics';
 import { Pacients } from './pages/pacients/pacients';
 import { Appointments } from './pages/appointments/appointments';
 import { Login } from './pages/login/login';
+import { Register } from './pages/register/register';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -12,5 +13,6 @@ export const routes: Routes = [
   { path: 'appointments', component: Appointments },
   { path: 'pacients', component: Pacients},
   { path: 'login', component: Login },
+  { path: 'register', component: Register },
   { path: '**', redirectTo: '' } // Redirect pentru rute inexistente
 ];

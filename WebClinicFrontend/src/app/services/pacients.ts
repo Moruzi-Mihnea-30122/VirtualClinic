@@ -16,7 +16,7 @@ export class PacientsService {
     );
   }
 
-  addPacient(pacient: {name: string, emailAddress: string, telNumber: string}){
+  addPacient(pacient: {name: string, emailAddress: string, telNumber: string, password: string, role: string}){
     return this.http.post<any>(this.apiUrl, pacient);
   }
 
