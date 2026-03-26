@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AppointmentsService } from '../../services/appointments';
 import { MedicService } from '../../services/medics';
+import { PacientsService } from '../../services/pacients';
 
 @Component({
   selector: 'app-appointments',
@@ -13,7 +14,9 @@ import { MedicService } from '../../services/medics';
 export class Appointments implements OnInit{
   appointmentsList = signal<any[]>([]);
   medics = signal<any[]>([]);
+  pacients = signal<any[]>([]);
   wantsAppointment = false;
+  userRole = localStorage.getItem('userRole');
 
   date = '';
   time = '';
@@ -23,7 +26,7 @@ export class Appointments implements OnInit{
   times = [ '08:00', '8:15', '08:30','8:45', '09:00','9:15', '09:30','9:45', '10:00','10:15', '10:30', '10:45',
     '11:00','11:15', '11:30','11:45', '12:00', '14:00','14:15', '14:30','14:45', '15:00'];
 
-  constructor(private appointmentsService: AppointmentsService, private medicsService: MedicService){ }
+  constructor(private appointmentsService: AppointmentsService, private medicsService: MedicService, private pacientsService: PacientsService){ }
 
   ngOnInit(): void {
     this.loadAppointments();
@@ -38,7 +41,7 @@ export class Appointments implements OnInit{
   }
 
   loadAppointments(){
-    if(localStorage.getItem('userRole') == "Admin")
+    if(this.userRole== "Admin")
     {
       this.appointmentsService.getAppointments().subscribe({
         next: (data) => {
@@ -49,8 +52,13 @@ export class Appointments implements OnInit{
           console.log(err);
         }
       })
+      this.pacientsService.getPacients().subscribe({
+        next: (data) => {
+          this.pacients.set(data);
+        }
+      })
     }
-    else if(localStorage.getItem('userRole') == "Pacient"){
+    else if(this.userRole == "Pacient"){
       if(localStorage.getItem('userId') != null){
         this.appointmentsService.getAppointmentsById(localStorage.getItem('userId')!).subscribe({
           next: (data) => {
@@ -79,6 +87,10 @@ export class Appointments implements OnInit{
   }
   getMedic(medicId: number){
     return this.medics().find(m => m.id == medicId);
+  }
+
+  getPacient(pacientId: number){
+    return this.pacients().find(p => p.id == pacientId);
   }
 
 }

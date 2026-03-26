@@ -1,10 +1,19 @@
 @if (appointmentsList().length > 0) {
   <ul>
+    @if(userRole === "Pacient"){
     @for (appointment of appointmentsList(); track appointment.id) {
       <li>
         <strong>{{ appointment.date | date: 'short' }}</strong> - {{getMedic(appointment.medicId).name}}
       </li>
     }
+}@else {
+    @for (appointment of appointmentsList(); track appointment.id) {
+      <li>
+        <strong>{{ appointment.date | date: 'short' }}</strong> - {{getMedic(appointment.medicId).name}} - Pacient: {{getPacient(appointment.pacientId).name}}
+      </li>
+    }
+}
+
   </ul>
 } @else {
   <p>Nu aveti nicio programare</p>

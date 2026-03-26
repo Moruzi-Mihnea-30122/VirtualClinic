@@ -41,13 +41,7 @@ namespace WebClinic.Controllers
 
             return appointments;
         }
-        [HttpGet("pacients/{id}")]
-        public async Task<ActionResult<IEnumerable<Appointments>>> GetProgramariPacient(int id)
-        {
-            return await _context.Appointments
-                .Where(p => p.pacientId == id)
-                .ToListAsync();
-        }
+        
 
         // PUT: api/Appointments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
