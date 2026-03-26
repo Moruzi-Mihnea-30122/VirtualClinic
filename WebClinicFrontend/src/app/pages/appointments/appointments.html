@@ -1,1 +1,40 @@
-<p>appointments works!</p>
+@if (appointmentsList().length > 0) {
+  <ul>
+    @for (appointment of appointmentsList(); track appointment.id) {
+      <li>
+        <strong>{{ appointment.date | date: 'short' }}</strong> - {{getMedic(appointment.medicId).name}}
+      </li>
+    }
+  </ul>
+} @else {
+  <p>Nu aveti nicio programare</p>
+}
+@if(!wantsAppointment){
+<button (click)="wantsAppointment = true">Faceti o programare</button>
+}@else{
+<div class="add-appointment-card">
+
+  <label>Medic:</label>
+  <select [(ngModel)]="newAppointment.medicId">
+    <option value="0">Select Medic</option>
+    @for (medic of medics(); track medic.id) {
+      <option [value]="medic.id">{{ medic.name }}</option>
+    }
+  </select>
+
+  <label>Day:</label>
+  <input type="date" [(ngModel)]="date">
+
+  <label>Time:</label>
+  <select [(ngModel)]="time">
+    <option value="">--:--</option>
+    @for (time of times; track time) {
+      <option [value]="time">{{ time }}</option>
+    }
+  </select>
+  </div>    
+  <button (click)="makeAppointment()" 
+          (click)="wantsAppointment = false">
+    Confirmă Programarea
+  </button>
+}

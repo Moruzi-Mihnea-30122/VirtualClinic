@@ -30,9 +30,9 @@ namespace WebClinic.Controllers
 
         // GET: api/Appointments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Appointments>> GetAppointments(int id)
+        public async Task<ActionResult<IEnumerable<Appointments>>> GetAppointments(int id)
         {
-            var appointments = await _context.Appointments.FindAsync(id);
+            var appointments = await _context.Appointments.Where(p => p.pacientId == id).ToListAsync();
 
             if (appointments == null)
             {
@@ -85,6 +85,7 @@ namespace WebClinic.Controllers
         [HttpPost]
         public async Task<ActionResult<Appointments>> PostAppointments(Appointments appointments)
         {
+            
             var appointmentIntervalLow = appointments.date.AddMinutes(-30);
             var appointmentIntervalHigh = appointments.date.AddMinutes(30);
             bool doctorIsBusy = await _context.Appointments.AnyAsync(p => 
@@ -97,7 +98,7 @@ namespace WebClinic.Controllers
                 return BadRequest("Medic is busy");
             }
 
-            bool pacientIsBusy = await _context.Appointments.AllAsync(p => 
+            bool pacientIsBusy = await _context.Appointments.AnyAsync(p => 
             p.pacientId == appointments.pacientId && 
             p.date > appointmentIntervalLow && 
             p.date < appointmentIntervalHigh);

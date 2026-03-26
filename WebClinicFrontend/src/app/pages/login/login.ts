@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { LoginService } from '../../services/login';
 import { App } from '../../app';
 
 @Component({
@@ -14,11 +14,11 @@ export class Login {
    email = '';
    password = '';
 
-  constructor(private router: Router, private http: HttpClient, private appListener: App){ }
+  constructor(private router: Router, private loginService: LoginService, private appListener: App){ }
 
   login(){
     if(this.email && this.password){
-    this.http.post('https://localhost:7132/api/Pacients/login', { email: this.email, password: this.password }).subscribe({
+    this.loginService.checkLogin(this.email, this.password).subscribe({
       next: (user: any) => {
         localStorage.setItem('userRole', user.role);
         localStorage.setItem('userId', user.id);

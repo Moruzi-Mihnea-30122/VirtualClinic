@@ -4,14 +4,20 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class Appointments {
+export class AppointmentsService {
   private apiUrl = "https://localhost:7132/api/appointments";
 
   constructor(private http: HttpClient){}
 
   getAppointments(){
-    this.http.get<any[]>(this.apiUrl);
+   return this.http.get<any[]>(this.apiUrl);
   }
 
-  //TO DO: addAppointment
+  getAppointmentsById(id: string){
+   return this.http.get<any[]>(this.apiUrl +'/'+ id);
+  }
+
+  addAppointment(appointment: {date: string, pacientId: string, medicId: string}){
+    return this.http.post<any>(this.apiUrl, appointment)
+  }
 }
