@@ -60,7 +60,7 @@ export class Appointments implements OnInit{
     }
     else if(this.userRole == "Pacient"){
       if(localStorage.getItem('userId') != null){
-        this.appointmentsService.getAppointmentsById(localStorage.getItem('userId')!).subscribe({
+        this.appointmentsService.getAppointmentsByPacientId(localStorage.getItem('userId')!).subscribe({
           next: (data) => {
             this.appointmentsList.set(data);
             console.log("Appointments loaded: ", data);
@@ -86,6 +86,9 @@ export class Appointments implements OnInit{
     })
   }
   getMedic(medicId: number){
+    console.log(this.medics().find(m => m.id == medicId));
+    console.log(this.medics());
+    console.log(medicId);
     return this.medics().find(m => m.id == medicId);
   }
 

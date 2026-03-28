@@ -10,7 +10,7 @@ using WebClinic.Models;
 
 namespace WebClinic.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/pacients")]
     [ApiController]
     public class PacientsController : ControllerBase
     {
@@ -23,14 +23,14 @@ namespace WebClinic.Controllers
 
         // GET: api/Pacients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pacients>>> GetPacients()
+        public async Task<ActionResult<IEnumerable<Pacient>>> GetPacients()
         {
             return await _context.Pacients.ToListAsync();
         }
 
         // GET: api/Pacients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pacients>> GetPacients(int id)
+        public async Task<ActionResult<Pacient>> GetPacients(int id)
         {
             var pacients = await _context.Pacients.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace WebClinic.Controllers
         // PUT: api/Pacients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPacients(int id, Pacients pacients)
+        public async Task<IActionResult> PutPacients(int id, Pacient pacients)
         {
             if (id != pacients.Id)
             {
@@ -76,7 +76,7 @@ namespace WebClinic.Controllers
         // POST: api/Pacients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Pacients>> PostPacients(Pacients pacients)
+        public async Task<ActionResult<Pacient>> PostPacients(Pacient pacients)
         {
             bool pacientAlreadyExists = await _context.Pacients.AnyAsync(p =>
             p.Name == pacients.Name ||

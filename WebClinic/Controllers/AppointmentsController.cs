@@ -7,69 +7,47 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebClinic;
 using WebClinic.Models;
+using WebClinic.Repositories;
 
 namespace WebClinic.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/appointments")]
     [ApiController]
     public class AppointmentsController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IAppointmentsRepository _appointmentsRepository;
 
-        public AppointmentsController(AppDbContext context)
+        public AppointmentsController(IAppointmentsRepository appointmentsRepository)
         {
-            _context = context;
+            _appointmentsRepository = appointmentsRepository;
         }
 
         // GET: api/Appointments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Appointments>>> GetAppointments()
+        public async Task<ActionResult<IEnumerable<Appointment>>> GetAppointments([FromQuery] int? pacientId)
         {
-            return await _context.Appointments.ToListAsync();
-        }
-
-        // GET: api/Appointments/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Appointments>>> GetAppointments(int id)
-        {
-            var appointments = await _context.Appointments.Where(p => p.pacientId == id).ToListAsync();
-
-            if (appointments == null)
+            var query = _appointmentsRepository.Query();
+            if (pacientId != null)
             {
-                return NotFound();
+                query = query.Where(p => p.PacientId == pacientId);
             }
-
-            return appointments;
+            return await query.ToListAsync();
         }
-        
+
 
         // PUT: api/Appointments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAppointments(int id, Appointments appointments)
+        public async Task<IActionResult> PutAppointments(int id, Appointment appointments)
         {
             if (id != appointments.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(appointments).State = EntityState.Modified;
+            _appointmentsRepository.Store(appointments);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AppointmentsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _appointmentsRepository.SaveChanges();
 
             return NoContent();
         }
@@ -77,33 +55,33 @@ namespace WebClinic.Controllers
         // POST: api/Appointments
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Appointments>> PostAppointments(Appointments appointments)
+        public async Task<ActionResult<Appointment>> PostAppointments(Appointment appointments)
         {
             
-            var appointmentIntervalLow = appointments.date.AddMinutes(-30);
-            var appointmentIntervalHigh = appointments.date.AddMinutes(30);
-            bool doctorIsBusy = await _context.Appointments.AnyAsync(p => 
-            p.date > appointmentIntervalLow && 
-            p.date < appointmentIntervalHigh && 
-            p.medicId == appointments.medicId);
+            var appointmentIntervalLow = appointments.Date.AddMinutes(-30);
+            var appointmentIntervalHigh = appointments.Date.AddMinutes(30);
+            var doctorIsBusy = await _appointmentsRepository.Query().AnyAsync(p => 
+            p.Date > appointmentIntervalLow && 
+            p.Date < appointmentIntervalHigh && 
+            p.MedicId == appointments.MedicId);
 
             if (doctorIsBusy)
             {
                 return BadRequest("Medic is busy");
             }
 
-            bool pacientIsBusy = await _context.Appointments.AnyAsync(p => 
-            p.pacientId == appointments.pacientId && 
-            p.date > appointmentIntervalLow && 
-            p.date < appointmentIntervalHigh);
+            var pacientIsBusy = await _appointmentsRepository.Query().AnyAsync(p => 
+            p.PacientId == appointments.PacientId && 
+            p.Date > appointmentIntervalLow && 
+            p.Date < appointmentIntervalHigh);
 
             if (pacientIsBusy)
             {
                 return BadRequest("Pacient is busy");
             }
 
-            _context.Appointments.Add(appointments);
-            await _context.SaveChangesAsync();
+            _appointmentsRepository.Store(appointments);
+            await _appointmentsRepository.SaveChanges();
 
             return CreatedAtAction("GetAppointments", new { id = appointments.Id }, appointments);
         }
@@ -112,21 +90,21 @@ namespace WebClinic.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAppointments(int id)
         {
-            var appointments = await _context.Appointments.FindAsync(id);
+            var appointments = await _appointmentsRepository.Query().FirstOrDefaultAsync(a => a.Id == id);
             if (appointments == null)
             {
                 return NotFound();
             }
 
-            _context.Appointments.Remove(appointments);
-            await _context.SaveChangesAsync();
+            _appointmentsRepository.Delete(appointments);
+            await _appointmentsRepository.SaveChanges();
 
             return NoContent();
         }
 
         private bool AppointmentsExists(int id)
         {
-            return _context.Appointments.Any(e => e.Id == id);
+            return _appointmentsRepository.Query().Any(e => e.Id == id);
         }
     }
 }

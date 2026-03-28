@@ -2,7 +2,7 @@
 
 namespace WebClinic.Models
 {
-    public class Medics
+    public class Medic
     {
         [Key]
         public int Id { get; set; }

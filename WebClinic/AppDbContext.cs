@@ -6,8 +6,8 @@ namespace WebClinic
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options ) : base( options ) { }
-        public DbSet<Pacients> Pacients { get; set; }
-        public DbSet<Medics> Medics { get; set; }
-        public DbSet<Appointments> Appointments { get; set; }
+        public DbSet<Pacient> Pacients { get; set; }
+        public DbSet<Medic> Medics { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
     }
 }

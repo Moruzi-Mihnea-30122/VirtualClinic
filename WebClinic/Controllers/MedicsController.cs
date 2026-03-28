@@ -23,14 +23,14 @@ namespace WebClinic.Controllers
 
         // GET: api/Medics
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Medics>>> GetMedics()
+        public async Task<ActionResult<IEnumerable<Medic>>> GetMedics()
         {
             return await _context.Medics.ToListAsync();
         }
 
         // GET: api/Medics/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Medics>> GetMedics(int id)
+        public async Task<ActionResult<Medic>> GetMedics(int id)
         {
             var medics = await _context.Medics.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace WebClinic.Controllers
         // PUT: api/Medics/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMedics(int id, Medics medics)
+        public async Task<IActionResult> PutMedics(int id, Medic medics)
         {
             if (id != medics.Id)
             {
@@ -76,7 +76,7 @@ namespace WebClinic.Controllers
         // POST: api/Medics
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Medics>> PostMedics(Medics medics)
+        public async Task<ActionResult<Medic>> PostMedics(Medic medics)
         {
             _context.Medics.Add(medics);
             await _context.SaveChangesAsync();

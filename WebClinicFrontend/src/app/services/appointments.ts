@@ -13,8 +13,8 @@ export class AppointmentsService {
    return this.http.get<any[]>(this.apiUrl);
   }
 
-  getAppointmentsById(id: string){
-   return this.http.get<any[]>(this.apiUrl +'/'+ id);
+  getAppointmentsByPacientId(id: string){
+   return this.http.get<any[]>(`${this.apiUrl}?pacientId=${id}`);
   }
 
   addAppointment(appointment: {date: string, pacientId: string, medicId: string}){

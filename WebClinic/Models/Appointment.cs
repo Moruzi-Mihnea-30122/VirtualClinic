@@ -2,15 +2,15 @@
 
 namespace WebClinic.Models
 {
-    public class Appointments
+    public class Appointment
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public DateTime date { get; set; }
+        public DateTime Date { get; set; }
 
-        public int pacientId  { get; set; }
-        public int medicId { get; set; }
+        public int PacientId  { get; set; }
+        public int MedicId { get; set; }
     }
 }
