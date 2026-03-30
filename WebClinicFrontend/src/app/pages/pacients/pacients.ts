@@ -1,6 +1,7 @@
 import { Component, signal, OnInit} from '@angular/core';
 import { PacientsService } from '../../services/pacients';
 import { FormsModule } from '@angular/forms';
+import { App } from '../../app';
 
 @Component({
   selector: 'app-pacients',
@@ -13,10 +14,14 @@ export class Pacients {
 
   newPacient = {name: '', emailAddress: '', telNumber: '', password: 'default', role: 'Pacient'};
 
-  constructor(private pacientsService: PacientsService){ }
+  constructor(private pacientsService: PacientsService, private appListener: App){ }
 
   ngOnInit():void{
     this.loadPacients();
+  }
+
+  getUserRole(){
+    return this.appListener.userRole();
   }
 
   loadPacients():void{
@@ -40,5 +45,9 @@ export class Pacients {
       this.newPacient = {name: '', emailAddress: '', telNumber: '', password: 'default', role: 'Pacient'};
       
     }
+  }
+
+  deletePacient(pacientId: number){
+    this.pacientsService.removePacient(pacientId);
   }
 }

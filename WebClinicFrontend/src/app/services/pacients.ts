@@ -20,4 +20,7 @@ export class PacientsService {
     return this.http.post<any>(this.apiUrl, pacient);
   }
 
+  removePacient(padientId: number){
+    return this.http.delete(`${this.apiUrl}/${padientId}`);
+  }
 }

@@ -45,5 +45,17 @@ export class MedicsComponent implements OnInit{
       })
     }
   }
+
+  deleteMedic(medicId: number):void{
+    this.medicService.deleteMedic(medicId).subscribe({
+      next: (data) => {
+        console.log("Medic deleted", data);
+        this.loadMedics();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
  
 }

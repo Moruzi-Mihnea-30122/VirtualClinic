@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { MedicsComponent } from '../pages/medics/medics';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,9 @@ export class MedicService {
 
   addMedic(medic: {name: string, fieldOfWork: string}) {
     return this.http.post<any>(this.apiUrl, medic);
+  }
+  deleteMedic(medicId: number){
+    return this.http.delete<any>(`${this.apiUrl}/${medicId}`);
   }
 
 }

@@ -5,6 +5,9 @@
     @for (pacient of pacients(); track pacient.id) {
       <li>
         <strong>{{ pacient.name }}</strong> - {{ pacient.emailAddress }}
+        @if(getUserRole() == "Admin"){
+          <button (click)="deletePacient(pacient.id)">Delete</button>
+        }
       </li>
     }
   </ul>
