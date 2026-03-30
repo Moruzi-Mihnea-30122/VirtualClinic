@@ -96,4 +96,16 @@ export class Appointments implements OnInit{
     return this.pacients().find(p => p.id == pacientId);
   }
 
+  deleteApointment(appointmentId: number){
+    this.appointmentsService.deleteAppointment(appointmentId).subscribe({
+      next: () => {
+        console.log("Appointment deleted, ", appointmentId);
+        this.loadAppointments();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
 }

@@ -4,12 +4,14 @@
     @for (appointment of appointmentsList(); track appointment.id) {
       <li>
         <strong>{{ appointment.date | date: 'short' }}</strong> - {{getMedic(appointment.medicId)?.name}}
+        <button (click)="deleteApointment(appointment.id)">Delete Appointment</button>
       </li>
     }
 }@else {
     @for (appointment of appointmentsList(); track appointment.id) {
       <li>
         <strong>{{ appointment.date | date: 'short' }}</strong> - {{getMedic(appointment.medicId)?.name}} - Pacient: {{getPacient(appointment.pacientId)?.name}}
+        <button (click)="deleteApointment(appointment.id)">Delete Appointment</button>
       </li>
     }
 }
