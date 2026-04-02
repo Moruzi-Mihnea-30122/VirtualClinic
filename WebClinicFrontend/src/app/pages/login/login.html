@@ -1,6 +1,11 @@
-<div class="login-container">
-  <input [(ngModel)]="email" placeholder="Email Address" />
-  <input [(ngModel)]="password" placeholder="Password" />
-  <button (click)='login()'>Login</button>
+<div class="login-wrapper">
+  <div class="login-card">
+    <h2>Login to your account</h2>
+<div class="form-group">
+  <input class="login-input" [(ngModel)]="email" placeholder="Email Address" />
+  <input class="login-input" [(ngModel)]="password" placeholder="Password" />
+  <button class ="btn-login" (click)='login()'>Login</button>
 </div>
-<button (click)="registerNav()">New account</button>
+<button class="btn-new-account" (click)="registerNav()">New account</button>
+</div>
+</div>

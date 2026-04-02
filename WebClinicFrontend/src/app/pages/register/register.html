@@ -1,11 +1,15 @@
-<div class="login-container">
-  <input [(ngModel)]="newUser.name" placeholder="Full Name" />
-  <input [(ngModel)]="newUser.emailAddress" placeholder="Email Address" />
-  <input [(ngModel)]="newUser.telNumber" placeholder="Phone Number" />
+<div class="register-wrapper">
+<div class="rister-card">
+  <h2>Register new account</h2>
+  <div class="form-group">
+  <input class="register-input" [(ngModel)]="newUser.name" placeholder="Full Name" />
+  <input class="register-input" [(ngModel)]="newUser.emailAddress" placeholder="Email Address" />
+  <input class="register-input" [(ngModel)]="newUser.telNumber" placeholder="Phone Number" />
+  <input class="register-input" [(ngModel)]="newUser.password" placeholder="Password" />
+  <input class="register-input" [(ngModel)]="checkedPassword" placeholder="Check Password" />
+<button class="btn-register" (click)='registerUser()'>Register</button>  
 </div>
-<div>
-  <input [(ngModel)]="newUser.password" placeholder="Password" />
-  <input [(ngModel)]="checkedPassword" placeholder="Check Password" />
+  
+<button class="btn-back" (click)="loginNav()">Back</button>
 </div>
-<button (click)='registerUser()'>Register</button>
-<button (click)="loginNav()">Back</button>
+</div>

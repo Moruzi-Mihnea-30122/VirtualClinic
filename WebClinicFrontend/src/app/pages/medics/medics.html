@@ -1,13 +1,17 @@
+<div class = "medics-container">
 <h2>Echipa noastră de medici</h2>
 
 @if (medics().length > 0) {
-  <ul>
+  <ul class = "medics-grid">
     @for (medic of medics(); track medic.id) {
       <li>
-        <strong>{{ medic.name }}</strong> - {{ medic.fieldOfWork }}
+      <div class = "medics-card">
+        <div class="medic-name">{{ medic.name }}</div>
+        <span class="medic-fieldOfWork">Field - {{ medic.fieldOfWork }}</span>
         @if(getUserRole() === "Admin"){
-        <button (click)="deleteMedic(medic.id)">Delete</button>
-      }
+        <button class = "btn-delete-medic" (click)="deleteMedic(medic.id)">Delete</button>
+        }
+      </div>  
       </li>
     }
   </ul>
@@ -16,9 +20,10 @@
 }
 
 @if(getUserRole() === "Admin"){
-<div class="form-container">
-  <input [(ngModel)]="newMedic.name" placeholder="Medic's Full Name" />
-  <input [(ngModel)]="newMedic.fieldOfWork" placeholder="Field of work" />
-  <button (click)='saveMedic()'>Add medic</button>
+<div class="form-group-inline">
+  <input class="form-control" [(ngModel)]="newMedic.name" placeholder="Medic's Full Name" />
+  <input class="form-control" [(ngModel)]="newMedic.fieldOfWork" placeholder="Field of work" />
+  <button class="btn-add-medic" (click)='saveMedic()'>Add medic</button>
 </div>
 }
+</div>

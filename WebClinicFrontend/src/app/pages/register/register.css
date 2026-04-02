@@ -1,0 +1,80 @@
+.register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;    
+  min-height: 100vh;      
+  background-color: #f0f7ff; 
+}
+
+.register-card {
+  background-color: white;
+  width: 100%;
+  max-width: 400px;        
+  padding: 40px;
+  border-radius: 15px;
+  border: 2px solid #add8e6; 
+  box-shadow: 0 10px 25px rgba(173, 216, 230, 0.3); 
+  text-align: center;
+}
+
+h2 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.register-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #d1e9f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box; 
+  transition: border-color 0.3s;
+}
+
+.register-input:focus {
+  outline: none;
+  border-color: #3498db;
+  background-color: #f9feff;
+}
+
+.btn-register {
+  width: 100%;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-register:hover {
+  background-color: #2980b9;
+}
+
+.btn-back {
+  width: 100%;
+  background-color: transparent;
+  color: #3498db;
+  border: 2px solid #3498db;
+  padding: 11px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background-color: #f0faff;
+  border-color: #2980b9;
+  color: #2980b9;
+}

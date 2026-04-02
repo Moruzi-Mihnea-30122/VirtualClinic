@@ -1,0 +1,109 @@
+.medics-container {
+  background-color:white;
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 10% auto;
+  border-radius: 15px;
+  border: 2px solid #add8e6; 
+  box-shadow: 0 10px 25px rgba(173, 216, 230, 0.3); 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.medics-grid {
+  display:flex;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 150px;
+}
+
+.medic-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 5px solid #3498db; 
+}
+
+.medic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.medic-name {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.medic-fieldOfWork {
+  color: #7f8c8d;
+  font-style: italic;
+  margin-bottom: 5px;
+  display: block;
+}
+.btn-delete-medic {
+  background-color: transparent;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+  padding: 5px 15px;
+  border-radius: 15px;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-delete-medic:hover {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.add-medic-section {
+  background-color: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  border-left: 5px solid #2ecc71; 
+}
+.form-control {
+  flex: 1; 
+  min-width: 250px;
+  padding: 12px 15px;
+  border: 2px solid #e0e6ed;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+.form-group-inline {
+  display: flex;
+  gap: 15px; 
+  flex-wrap: wrap; 
+}
+.btn-add-medic {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+
+.btn-add-medic:hover {
+  background-color: #27ae60;
+}
