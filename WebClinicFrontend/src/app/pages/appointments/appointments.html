@@ -1,56 +1,62 @@
-@if (appointmentsList().length > 0) {
-  
+<div class="appointments-page">
+  @if (appointmentsList().length > 0) {
     @if(userRole === "Pacient"){
-      <h2>Lista programarilor tale</h2>
-      <ul>
-    @for (appointment of appointmentsList(); track appointment.id) {
-      <li>
-        <strong>{{ appointment.date | date: 'short' }}</strong> - {{getMedic(appointment.medicId)?.name}}
-        <button (click)="deleteApointment(appointment.id)">Delete</button>
-      </li>
+      <h2 class="section-title">Lista programarilor tale</h2>
+      <ul class="appointment-list">
+        @for (appointment of appointmentsList(); track appointment.id) {
+          <li class="appointment-item">
+            <div class="appointment-info">
+              <strong class="appointment-date">{{ appointment.date | date: 'short' }}</strong> 
+              <span class="appointment-medic">- {{getMedic(appointment.medicId)?.name}}</span>
+            </div>
+            <button class="btn-cancel" (click)="deleteApointment(appointment.id)">Delete</button>
+          </li>
+        }
+      </ul>
+    } @else {
+      <h2 class="section-title">Lista programarilor fiecarui pacient</h2>
+      <ul class="appointment-list">
+        @for (appointment of appointmentsList(); track appointment.id) {
+          <li class="appointment-item">
+            <div class="appointment-info">
+              <strong class="appointment-date">{{ appointment.date | date: 'short' }}</strong> 
+              <span class="appointment-medic">- {{getMedic(appointment.medicId)?.name}}</span>
+              <span class="appointment-pacient">- Pacient: {{getPacient(appointment.pacientId)?.name}}</span>
+            </div>
+            <button class="btn-cancel" (click)="deleteApointment(appointment.id)">Delete</button>
+          </li>
+        }
+      </ul>
     }
-    </ul>
-}@else {
-  <h2>Lista programarilor fiecarui pacient</h2>
-    <ul>
-    @for (appointment of appointmentsList(); track appointment.id) {
-      <li>
-        <strong>{{ appointment.date | date: 'short' }}</strong> - {{getMedic(appointment.medicId)?.name}} - Pacient: {{getPacient(appointment.pacientId)?.name}}
-        <button (click)="deleteApointment(appointment.id)">Delete</button>
-      </li>
-    }
-    </ul>
-}
+  } @else {
+    <p class="no-data">Nu aveti nicio programare</p>
+  }
 
-} @else {
-  <p>Nu aveti nicio programare</p>
-}
-@if(!wantsAppointment){
-<button (click)="wantsAppointment = true">Faceti o programare</button>
-}@else{
-<div class="add-appointment-card">
+  @if(!wantsAppointment){
+    <button class="btn-primary" (click)="wantsAppointment = true">Faceti o programare</button>
+  } @else {
+    <div class="add-appointment-card">
+      <label class="form-label">Medic:</label>
+      <select class="form-select" [(ngModel)]="newAppointment.medicId">
+        <option value="0">Select Medic</option>
+        @for (medic of medics(); track medic.id) {
+          <option [value]="medic.id">{{ medic.name }}</option>
+        }
+      </select>
 
-  <label>Medic:</label>
-  <select [(ngModel)]="newAppointment.medicId">
-    <option value="0">Select Medic</option>
-    @for (medic of medics(); track medic.id) {
-      <option [value]="medic.id">{{ medic.name }}</option>
-    }
-  </select>
+      <label class="form-label">Day:</label>
+      <input type="date" class="form-input" [(ngModel)]="date">
 
-  <label>Day:</label>
-  <input type="date" [(ngModel)]="date">
-
-  <label>Time:</label>
-  <select [(ngModel)]="time">
-    <option value="">--:--</option>
-    @for (time of times; track time) {
-      <option [value]="time">{{ time }}</option>
-    }
-  </select>
-  </div>    
-  <button (click)="makeAppointment()" 
-          (click)="wantsAppointment = false">
-    Confirmă Programarea
-  </button>
-}
+      <label class="form-label">Time:</label>
+      <select class="form-select" [(ngModel)]="time">
+        <option value="">--:--</option>
+        @for (time of times; track time) {
+          <option [value]="time">{{ time }}</option>
+        }
+      </select>
+    </div>    
+    <button class="btn-confirm" (click)="makeAppointment()" (click)="wantsAppointment = false">
+      Confirmă Programarea
+    </button>
+  }
+</div>

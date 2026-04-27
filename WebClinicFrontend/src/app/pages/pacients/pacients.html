@@ -1,13 +1,18 @@
+<div class = "pacients-container">
 <h2>Lista Pacienti</h2>
 
 @if (pacients().length > 0) {
-  <ul>
+  <ul class = "pacient-grid">
     @for (pacient of pacients(); track pacient.id) {
       <li>
-        <strong>{{ pacient.name }}</strong> - {{ pacient.emailAddress }}
+        <div class = "pacient-card">
+        <div class = "pacient-name">{{ pacient.name }}</div>  
+        <span class = "pacient-email">{{ pacient.emailAddress }}</span>
+        <span class = "pacient-telNumber">{{ pacient.telNumber }}</span>
         @if(getUserRole() == "Admin"){
-          <button (click)="deletePacient(pacient.id)">Delete</button>
+          <button class = "btn-delete-pacient" (click)="deletePacient(pacient.id)">Delete</button>
         }
+        </div>
       </li>
     }
   </ul>
@@ -15,9 +20,10 @@
   <p>Nu există pacienti în listă</p>
 }
 
-<div class="form-container">
-  <input [(ngModel)]="newPacient.name" placeholder="Full Name" />
-  <input [(ngModel)]="newPacient.emailAddress" placeholder="Email Address" />
-  <input [(ngModel)]="newPacient.telNumber" placeholder="Phone Number" />
-  <button (click)='addPacient()'>Add pacient</button>
+<div class="form-group-inline">
+  <input class = "form-control" [(ngModel)]="newPacient.name" placeholder="Full Name" />
+  <input class = "form-control" [(ngModel)]="newPacient.emailAddress" placeholder="Email Address" />
+  <input class = "form-control" [(ngModel)]="newPacient.telNumber" placeholder="Phone Number" />
+  <button class = "btn-add-pacient" (click)='addPacient()'>Add pacient</button>
+</div> 
 </div>

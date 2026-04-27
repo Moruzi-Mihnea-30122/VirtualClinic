@@ -1,23 +1,25 @@
 @if(userRole()){
-<nav>
-  @if (userRole() === 'Admin'){
-  <a routerLink="/home">Home</a> |
-  <a routerLink="/medics">Medics</a> |
-  <a routerLink="/appointments">Appointments</a> |
-  <a routerLink="/pacients">Pacients</a>
-  }
+<nav class="navbar">
+  <div class="nav-links">
+    <a routerLink="/home" routerLinkActive="active-link">Home</a>
+    
+    @if (userRole() === 'Admin'){
+      <a routerLink="/medics" routerLinkActive="active-link">Medics</a>
+      <a routerLink="/appointments" routerLinkActive="active-link">Appointments</a>
+      <a routerLink="/pacients" routerLinkActive="active-link">Pacients</a>
+    }
 
-  @if (userRole() === 'Pacient'){
-    <a routerLink="/home">Home</a> |
-  <a routerLink="/medics">Medics</a> |
-  <a routerLink="/appointments">Appointments</a> |
-  }
+    @if (userRole() === 'Pacient'){
+      <a routerLink="/medics" routerLinkActive="active-link">Medics</a>
+      <a routerLink="/appointments" routerLinkActive="active-link">Appointments</a>
+    }
+  </div>
 
-  <button (click)="logout()">Logout</button>
-
+  <div class="nav-actions">
+    <span class="user-badge">{{ userRole() }}</span>
+    <button class="btn-logout" (click)="logout()">Logout</button>
+  </div>
 </nav>
-
 }
-<hr>
 
 <router-outlet></router-outlet>

@@ -1,0 +1,122 @@
+.pacients-container {
+  padding: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  color: #2c3e50;
+  border-bottom: 2px solid #add8e6;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+.pacient-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 40px;
+}
+
+.pacient-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e0e6ed;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pacient-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(173, 216, 230, 0.3);
+  border-color: #add8e6;
+}
+
+.pacient-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.pacient-email {
+  color: #3498db;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.pacient-telNumber {
+  color: #7f8c8d;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+}
+
+.btn-delete-pacient {
+  background-color: transparent;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  align-self: flex-start;
+  font-size: 0.8rem;
+  transition: all 0.3s;
+}
+
+.btn-delete-pacient:hover {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.form-group-inline {
+  display: flex;
+  gap: 10px;
+  background-color: #f0f7ff;
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid #add8e6;
+  flex-wrap: wrap;
+}
+
+.form-control {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px 15px;
+  border: 1px solid #d1e9f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.btn-add-pacient {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-add-pacient:hover {
+  background-color: #27ae60;
+}
+
+p {
+  color: #95a5a6;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
